@@ -42,6 +42,7 @@
       --streamer-button-hover: #cc0062;
       --live-badge: #ff0000;
       --live-badge-hover: #cc0000;
+      --live-glow: 0 0 16px rgba(255, 0, 0, 0.8);
       --calendar-button: #4caf50;
       --calendar-button-hover: #388e3c;
       --twitch-color: #9146ff;
@@ -219,6 +220,20 @@
       font-weight: 600;
       color: var(--text);
       text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .dropdown__items li.live::after {
+      content: 'Live Now';
+      background: var(--live-badge);
+      color: var(--text);
+      padding: 4px 8px;
+      border-radius: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      box-shadow: var(--live-glow);
     }
 
     .dropdown__items li:hover, .dropdown__items li:focus {
@@ -284,11 +299,24 @@
       text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
     }
 
+    .social-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .primary-socials {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+    }
+
     .social-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
       gap: 12px;
       justify-content: center;
+      margin-top: 12px;
     }
 
     .social-button {
@@ -306,6 +334,22 @@
       backdrop-filter: blur(10px);
       border: 1px solid var(--glass-border);
       box-shadow: var(--shadow);
+    }
+
+    .social-button.twitter, .social-button.facebook, .social-button.discord, .social-button.telegram,
+    .social-button.bluesky, .social-button.threads, .social-button.instagram, .social-button.reddit,
+    .social-button.snapchat, .social-button.tiktok, .social-button.kick, .social-button.trovo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .social-button.youtube, .social-button.twitch {
+      padding: 16px;
+      font-size: 1.8rem;
+      flex: 1;
+      justify-content: flex-start;
+      gap: 12px;
     }
 
     .social-button:hover, .social-button:focus {
@@ -328,10 +372,21 @@
     .social-button.kick { background: var(--color-kick); color: #000000; }
     .social-button.trovo { background: var(--color-trovo); }
 
-    .social-button img {
+    .social-button i, .social-button img {
       width: 24px;
       height: 24px;
       object-fit: contain;
+    }
+
+    .social-button.youtube i, .social-button.twitch i,
+    .social-button.youtube img, .social-button.twitch img {
+      width: 32px;
+      height: 32px;
+    }
+
+    .social-button .username {
+      font-size: 1rem;
+      font-weight: 500;
     }
 
     .action-buttons {
@@ -390,15 +445,17 @@
     .live-badge {
       background: var(--live-badge);
       color: var(--text);
-      padding: 8px 16px;
-      border-radius: 10px;
-      font-size: 0.9rem;
-      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 12px;
+      font-size: 1.2rem;
+      font-weight: 700;
       display: none;
       transition: all 0.3s ease;
-      box-shadow: var(--shadow);
+      box-shadow: var(--shadow), var(--live-glow);
       position: relative;
       overflow: hidden;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
 
     .live-badge.active {
@@ -407,17 +464,18 @@
 
     .live-badge:hover {
       background: var(--live-badge-hover);
-      transform: translateY(-2px);
+      transform: translateY(-4px);
+      box-shadow: var(--shadow), 0 0 20px rgba(255, 0, 0, 1);
     }
 
     .live-badge::before {
       content: '';
       position: absolute;
       top: 50%;
-      left: 8px;
+      left: 12px;
       transform: translateY(-50%);
-      width: 8px;
-      height: 8px;
+      width: 10px;
+      height: 10px;
       background: var(--text);
       border-radius: 50%;
       animation: flash 1.5s infinite ease-in-out;
@@ -487,9 +545,16 @@
       .social-container { padding: 28px; }
       .streamer-profile img { width: 100px; height: 100px; }
       .social-container h2 { font-size: 2rem; }
-      .social-grid { gap: 8px; }
+      .primary-socials { gap: 8px; }
+      .social-grid { gap: 8px; margin-top: 8px; }
       .social-button { padding: 10px; font-size: 1.2rem; }
+      .social-button.youtube, .social-button.twitch { padding: 14px; font-size: 1.6rem; }
+      .social-button i, .social-button img { width: 20px; height: 20px; }
+      .social-button.youtube i, .social-button.twitch i,
+      .social-button.youtube img, .social-button.twitch img { width: 28px; height: 28px; }
+      .social-button .username { font-size: 0.9rem; }
       .action-button { padding: 10px 20px; font-size: 0.9rem; }
+      .live-badge { padding: 10px 20px; font-size: 1rem; }
     }
 
     @media (max-width: 480px) {
@@ -500,8 +565,15 @@
       .social-container { padding: 20px; }
       .streamer-profile img { width: 80px; height: 80px; }
       .social-container h2 { font-size: 1.7rem; }
+      .primary-socials { flex-direction: column; gap: 8px; }
       .social-button { padding: 8px; font-size: 1rem; }
+      .social-button.youtube, .social-button.twitch { padding: 12px; font-size: 1.4rem; }
+      .social-button i, .social-button img { width: 18px; height: 18px; }
+      .social-button.youtube i, .social-button.twitch i,
+      .social-button.youtube img, .social-button.twitch img { width: 24px; height: 24px; }
+      .social-button .username { font-size: 0.85rem; }
       .action-button { padding: 8px 16px; font-size: 0.85rem; }
+      .live-badge { padding: 8px 16px; font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -523,7 +595,7 @@
       </div>
     </div>
     <div class="status-container">
-      <a class="live-badge" id="live-badge" href="#" target="_blank">Live on Twitch!</a>
+      <a class="live-badge" id="live-badge" href="#" target="_blank">Click to Join Stream</a>
       <div class="schedule-info" id="schedule-info">Next stream in: TBD</div>
     </div>
     <div class="social-container" id="social-container">
@@ -531,9 +603,12 @@
         <img src="https://i.postimg.cc/m2KQ0GDv/OGVK-ORG-LOGO-FINAL.png" alt="Streamer logo" id="streamer-avatar" loading="lazy">
       </div>
       <h2 id="streamer-name">Select a Streamer</h2>
-      <div class="social-grid" id="social-grid"></div>
+      <div class="social-buttons">
+        <div class="primary-socials" id="primary-socials"></div>
+        <div class="social-grid" id="social-grid"></div>
+      </div>
       <div class="action-buttons" id="action-buttons">
-        <button class="action-button" id="calendar-button"><i class="fas fa-calendar-plus"></i> Add Next Stream to Calendar</button>
+        <button class="action-button" id="calendar-button"><i class="fas fa-calendar-plus"></i> <span id="calendar-text">Add Next Stream to Calendar</span></button>
         <a class="action-button discord" id="discord-button" href="#" target="_blank"><i class="fab fa-discord"></i> Join Discord</a>
         <a class="action-button twitch-vods" id="vods-button" href="#" target="_blank"><i class="fab fa-twitch"></i> Watch VODs</a>
       </div>
@@ -550,7 +625,7 @@
           twitch: { webUrl: 'https://twitch.tv/xwlasxd' },
           twitter: { webUrl: 'https://twitter.com/xwlasxd' },
           facebook: { webUrl: 'https://facebook.com/xwlasxd' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/xwlasxd' },
           telegram: { webUrl: 'https://t.me/xwlasxd' },
           bluesky: { webUrl: 'https://bsky.app/profile/xwlasxd.bsky.social' },
           threads: { webUrl: 'https://threads.net/@xwlasxd' },
@@ -576,7 +651,7 @@
           twitch: { webUrl: 'https://twitch.tv/HeavySamLifts' },
           twitter: { webUrl: 'https://twitter.com/HeavySamLifts' },
           facebook: { webUrl: 'https://facebook.com/HeavySamLifts' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/HeavySamLifts' },
           telegram: { webUrl: 'https://t.me/HeavySamLifts' },
           bluesky: { webUrl: 'https://bsky.app/profile/heavysamlifts.bsky.social' },
           threads: { webUrl: 'https://threads.net/@HeavySamLifts' },
@@ -602,7 +677,7 @@
           twitch: { webUrl: 'https://twitch.tv/ShadyPeterLive' },
           twitter: { webUrl: 'https://twitter.com/ShadyPeterLive' },
           facebook: { webUrl: 'https://facebook.com/ShadyPeterLive' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/ShadyPeterLive' },
           telegram: { webUrl: 'https://t.me/ShadyPeterLive' },
           bluesky: { webUrl: 'https://bsky.app/profile/shadypeterlive.bsky.social' },
           threads: { webUrl: 'https://threads.net/@ShadyPeterLive' },
@@ -628,7 +703,7 @@
           twitch: { webUrl: 'https://twitch.tv/ramkrishanghoil' },
           twitter: { webUrl: 'https://twitter.com/ramkrishanghoil' },
           facebook: { webUrl: 'https://facebook.com/ramkrishanghoil' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/ramkrishanghoil' },
           telegram: { webUrl: 'https://t.me/ramkrishanghoil' },
           bluesky: { webUrl: 'https://bsky.app/profile/ramkrishanghoil.bsky.social' },
           threads: { webUrl: 'https://threads.net/@ramkrishanghoil' },
@@ -654,7 +729,7 @@
           twitch: { webUrl: 'https://twitch.tv/zxckjsdv' },
           twitter: { webUrl: 'https://twitter.com/zxckjsdv' },
           facebook: { webUrl: 'https://facebook.com/zxckjsdv' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/zxckjsdv' },
           telegram: { webUrl: 'https://t.me/zxckjsdv' },
           bluesky: { webUrl: 'https://bsky.app/profile/zxckjsdv.bsky.social' },
           threads: { webUrl: 'https://threads.net/@zxckjsdv' },
@@ -680,7 +755,7 @@
           twitch: { webUrl: 'https://twitch.tv/brbcompiling' },
           twitter: { webUrl: 'https://twitter.com/brbcompiling' },
           facebook: { webUrl: 'https://facebook.com/brbcompiling' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/brbcompiling' },
           telegram: { webUrl: 'https://t.me/brbcompiling' },
           bluesky: { webUrl: 'https://bsky.app/profile/brbcompiling.bsky.social' },
           threads: { webUrl: 'https://threads.net/@brbcompiling' },
@@ -706,7 +781,7 @@
           twitch: { webUrl: 'https://twitch.tv/ogvkorg' },
           twitter: { webUrl: 'https://twitter.com/ogvkorg' },
           facebook: { webUrl: 'https://facebook.com/ogvkorg' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/ogvkorg' },
           telegram: { webUrl: 'https://t.me/ogvkorg' },
           bluesky: { webUrl: 'https://bsky.app/profile/ogvkorg.bsky.social' },
           threads: { webUrl: 'https://threads.net/@ogvkorg' },
@@ -732,7 +807,7 @@
           twitch: { webUrl: 'https://twitch.tv/TrevorMarksman' },
           twitter: { webUrl: 'https://twitter.com/TrevorMarksman' },
           facebook: { webUrl: 'https://facebook.com/TrevorMarksman' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/TrevorMarksman' },
           telegram: { webUrl: 'https://t.me/TrevorMarksman' },
           bluesky: { webUrl: 'https://bsky.app/profile/trevormarksman.bsky.social' },
           threads: { webUrl: 'https://threads.net/@TrevorMarksman' },
@@ -758,7 +833,7 @@
           twitch: { webUrl: 'https://twitch.tv/ValentineCoolio' },
           twitter: { webUrl: 'https://twitter.com/ValentineCoolio' },
           facebook: { webUrl: 'https://facebook.com/ValentineCoolio' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/ValentineCoolio' },
           telegram: { webUrl: 'https://t.me/ValentineCoolio' },
           bluesky: { webUrl: 'https://bsky.app/profile/valentinecoolio.bsky.social' },
           threads: { webUrl: 'https://threads.net/@ValentineCoolio' },
@@ -784,7 +859,7 @@
           twitch: { webUrl: 'https://twitch.tv/LegacyMartian' },
           twitter: { webUrl: 'https://twitter.com/LegacyMartian' },
           facebook: { webUrl: 'https://facebook.com/LegacyMartian' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/LegacyMartian' },
           telegram: { webUrl: 'https://t.me/LegacyMartian' },
           bluesky: { webUrl: 'https://bsky.app/profile/legacymartian.bsky.social' },
           threads: { webUrl: 'https://threads.net/@LegacyMartian' },
@@ -810,7 +885,7 @@
           twitch: { webUrl: 'https://twitch.tv/MovieByMacaffe' },
           twitter: { webUrl: 'https://twitter.com/MovieByMacaffe' },
           facebook: { webUrl: 'https://facebook.com/MovieByMacaffe' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/MovieByMacaffe' },
           telegram: { webUrl: 'https://t.me/MovieByMacaffe' },
           bluesky: { webUrl: 'https://bsky.app/profile/moviebymacaffe.bsky.social' },
           threads: { webUrl: 'https://threads.net/@MovieByMacaffe' },
@@ -836,7 +911,7 @@
           twitch: { webUrl: 'https://twitch.tv/BizaroPeter' },
           twitter: { webUrl: 'https://twitter.com/BizaroPeter' },
           facebook: { webUrl: 'https://facebook.com/BizaroPeter' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/BizaroPeter' },
           telegram: { webUrl: 'https://t.me/BizaroPeter' },
           bluesky: { webUrl: 'https://bsky.app/profile/bizaropeter.bsky.social' },
           threads: { webUrl: 'https://threads.net/@BizaroPeter' },
@@ -862,7 +937,7 @@
           twitch: { webUrl: 'https://twitch.tv/GynaWENS' },
           twitter: { webUrl: 'https://twitter.com/GynaWENS' },
           facebook: { webUrl: 'https://facebook.com/GynaWENS' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/GynaWENS' },
           telegram: { webUrl: 'https://t.me/GynaWENS' },
           bluesky: { webUrl: 'https://bsky.app/profile/GynaWENS.bsky.social' },
           threads: { webUrl: 'https://threads.net/@GynaWENS' },
@@ -888,7 +963,7 @@
           twitch: { webUrl: 'https://twitch.tv/ggqporg' },
           twitter: { webUrl: 'https://twitter.com/ggqporg' },
           facebook: { webUrl: 'https://facebook.com/ggqporg' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/ggqporg' },
           telegram: { webUrl: 'https://t.me/ggqporg' },
           bluesky: { webUrl: 'https://bsky.app/profile/ggqporg.bsky.social' },
           threads: { webUrl: 'https://threads.net/@ggqporg' },
@@ -914,7 +989,7 @@
           twitch: { webUrl: 'https://twitch.tv/xvbrznem' },
           twitter: { webUrl: 'https://twitter.com/xvbrznem' },
           facebook: { webUrl: 'https://facebook.com/xvbrznem' },
-          discord: { webUrl: 'https://joindiscord.me' },
+          discord: { webUrl: 'https://discord.gg/xvbrznem' },
           telegram: { webUrl: 'https://t.me/xvbrznem' },
           bluesky: { webUrl: 'https://bsky.app/profile/xvbrznem.bsky.social' },
           threads: { webUrl: 'https://threads.net/@xvbrznem' },
@@ -939,11 +1014,13 @@
       const dropdownText = document.getElementById('dropdown-text');
       const streamerName = document.getElementById('streamer-name');
       const streamerAvatar = document.getElementById('streamer-avatar');
+      const primarySocials = document.getElementById('primary-socials');
       const socialGrid = document.getElementById('social-grid');
       const dropdown = document.querySelector('.dropdown');
       const liveBadge = document.getElementById('live-badge');
       const scheduleInfo = document.getElementById('schedule-info');
       const calendarButton = document.getElementById('calendar-button');
+      const calendarText = document.getElementById('calendar-text');
       const discordButton = document.getElementById('discord-button');
       const vodsButton = document.getElementById('vods-button');
 
@@ -963,6 +1040,12 @@
         kick: { icon: 'https://i.postimg.cc/B6Kcwrxn/kick-logo.png', label: 'Kick' },
         trovo: { icon: 'https://i.postimg.cc/7PSn1yHB/trovo-logo-1.png', label: 'Trovo' }
       };
+
+      async function checkLiveStatus(streamer) {
+        // Placeholder for Twitch API call (not implemented due to API key requirement)
+        // Assume schedule-based live status for now
+        return isStreamerLive(streamer) ? { isLive: true, platform: 'Twitch' } : { isLive: false };
+      }
 
       function showToast(message) {
         const toast = document.createElement('div');
@@ -992,48 +1075,47 @@
 
       function getTimeLeft(streamer) {
         const nzTime = getNzTime(new Date());
-        const currentHour = nzTime.getHours();
-        const currentMinute = nzTime.getMinutes();
-        const endTime = streamer.endHour;
-        const hoursLeft = endTime - currentHour - 1;
-        const minutesLeft = 60 - currentMinute;
-        let timeString = '';
-        if (hoursLeft > 0) timeString += `${hoursLeft}h `;
-        if (minutesLeft > 0) timeString += `${minutesLeft}m`;
-        return timeString.trim() || '<1m';
+        const endDate = new Date(nzTime);
+        endDate.setHours(streamer.endHour, 0, 0, 0);
+        if (endDate <= nzTime) {
+          endDate.setDate(endDate.getDate() + 1);
+        }
+        const timeDiffMs = endDate - nzTime;
+        const hoursLeft = Math.floor(timeDiffMs / (1000 * 60 * 60));
+        const minutesLeft = Math.floor((timeDiffMs % (1000 * 60 * 60)) / (1000 * 60));
+        const secondsLeft = Math.floor((timeDiffMs % (1000 * 60)) / 1000);
+        return `${hoursLeft}h ${minutesLeft}m ${secondsLeft}s`;
       }
 
       function getNextStreamInfo(streamer) {
         const nzTime = getNzTime(new Date());
         const currentDay = nzTime.getDay();
         const currentHour = nzTime.getHours();
-        let nextDay = currentDay;
         let daysToAdd = 0;
 
-        let startOffset = isStreamerLive(streamer) ? 1 : 0;
-        for (let i = startOffset; i <= 7 + startOffset; i++) {
-          nextDay = (currentDay + i) % 7;
+        // Always look for the next stream, even if currently live
+        for (let i = 1; i <= 7; i++) {
+          const nextDay = (currentDay + i) % 7;
           if (streamer.streamingDays.includes(nextDay)) {
             daysToAdd = i;
             break;
           }
         }
 
+        // If today is a streaming day and not past start time, consider today
+        if (isStreamingDay(streamer, nzTime) && currentHour < streamer.startHour && !isStreamerLive(streamer)) {
+          daysToAdd = 0;
+        }
+
         const nextStreamDate = new Date(nzTime);
         nextStreamDate.setDate(nzTime.getDate() + daysToAdd);
         nextStreamDate.setHours(streamer.startHour, 0, 0, 0);
 
-        if (isStreamingDay(streamer, nzTime) && !isStreamerLive(streamer) && currentHour < streamer.startHour && !startOffset) {
-          nextStreamDate.setDate(nzTime.getDate());
-          nextStreamDate.setHours(streamer.startHour, 0, 0, 0);
-        }
-
         const timeDiffMs = nextStreamDate - nzTime;
         const hoursLeft = Math.floor(timeDiffMs / (1000 * 60 * 60));
         const minutesLeft = Math.floor((timeDiffMs % (1000 * 60 * 60)) / (1000 * 60));
-        let countdownString = 'Next stream in: ';
-        if (hoursLeft > 0) countdownString += `${hoursLeft}h `;
-        if (minutesLeft > 0 || hoursLeft === 0) countdownString += `${minutesLeft}m`;
+        const secondsLeft = Math.floor((timeDiffMs % (1000 * 60)) / 1000);
+        const countdownString = `Next stream in: ${hoursLeft}h ${minutesLeft}m ${secondsLeft}s`;
 
         const dateString = nextStreamDate.toLocaleDateString('en-US', {
           weekday: 'short',
@@ -1049,7 +1131,7 @@
         });
 
         return {
-          countdown: countdownString.trim(),
+          countdown: countdownString,
           date: dateString,
           time: timeString,
           nextStreamDate
@@ -1091,12 +1173,33 @@
         return URL.createObjectURL(blob);
       }
 
-      function updateSocialLinks(streamer) {
+      async function updateSocialLinks(streamer) {
         streamerName.textContent = streamer.name;
         streamerAvatar.src = streamer.avatar;
         streamerAvatar.alt = `${streamer.name} logo`;
+        primarySocials.innerHTML = '';
         socialGrid.innerHTML = '';
-        Object.keys(streamer.social).forEach(platform => {
+
+        const primaryPlatforms = ['youtube', 'twitch'];
+        const otherPlatforms = Object.keys(streamer.social).filter(p => !primaryPlatforms.includes(p));
+
+        primaryPlatforms.forEach(platform => {
+          if (streamer.social[platform]) {
+            const { webUrl } = streamer.social[platform];
+            const { icon, label } = socialPlatforms[platform];
+            const socialButton = document.createElement('a');
+            socialButton.className = `social-button ${platform}`;
+            socialButton.href = webUrl;
+            socialButton.setAttribute('aria-label', `Follow ${streamer.name} on ${label}`);
+            const iconElement = icon.startsWith('fa-')
+              ? `<i class="${icon}"></i>`
+              : `<img src="${icon}" alt="${label} icon">`;
+            socialButton.innerHTML = `${iconElement}<span class="username">${streamer.name}</span>`;
+            primarySocials.appendChild(socialButton);
+          }
+        });
+
+        otherPlatforms.forEach(platform => {
           const { webUrl } = streamer.social[platform];
           const { icon, label } = socialPlatforms[platform];
           const socialButton = document.createElement('a');
@@ -1110,12 +1213,13 @@
         });
 
         const streamInfo = getNextStreamInfo(streamer);
-        if (isStreamerLive(streamer)) {
+        const liveStatus = await checkLiveStatus(streamer);
+        if (liveStatus.isLive) {
           liveBadge.classList.add('active');
-          liveBadge.href = streamer.twitch;
-          liveBadge.textContent = `Live on Twitch! (${getTimeLeft(streamer)} left)`;
+          liveBadge.href = streamer.social[liveStatus.platform.toLowerCase()]?.webUrl || streamer.twitch;
+          liveBadge.textContent = `Click to Join Stream (${getTimeLeft(streamer)} left)`;
           scheduleInfo.classList.remove('active');
-          calendarButton.style.display = 'none';
+          calendarButton.style.display = 'inline-flex'; // Show calendar button even when live
           vodsButton.style.display = 'none';
         } else {
           liveBadge.classList.remove('active');
@@ -1126,6 +1230,7 @@
           vodsButton.href = streamer.vods;
         }
 
+        calendarText.textContent = `Add Stream on ${streamInfo.date} at ${streamInfo.time} to Calendar`;
         discordButton.href = streamer.social.discord.webUrl;
 
         calendarButton.onclick = () => {
@@ -1149,13 +1254,22 @@
         }
       }
 
-      streamers.forEach(streamer => {
-        const li = document.createElement('li');
-        li.dataset.streamerId = streamer.id;
-        li.textContent = streamer.name;
-        li.tabIndex = 0;
-        dropdownItems.appendChild(li);
-      });
+      async function populateDropdown() {
+        dropdownItems.innerHTML = '';
+        for (const streamer of streamers) {
+          const li = document.createElement('li');
+          li.dataset.streamerId = streamer.id;
+          li.textContent = streamer.name;
+          li.tabIndex = 0;
+          const liveStatus = await checkLiveStatus(streamer);
+          if (liveStatus.isLive) {
+            li.classList.add('live');
+          }
+          dropdownItems.appendChild(li);
+        }
+      }
+
+      populateDropdown();
 
       function toggleDropdown() {
         const isOpen = dropdownItems.classList.contains('active');
@@ -1188,45 +1302,49 @@
         }
       });
 
-      dropdownItems.querySelectorAll('li').forEach(item => {
-        item.addEventListener('click', (e) => {
+      dropdownItems.addEventListener('click', async (e) => {
+        const item = e.target.closest('li');
+        if (item) {
           e.stopPropagation();
           const selectedStreamer = streamers.find(s => s.id === item.dataset.streamerId);
           dropdownText.textContent = selectedStreamer.name;
-          updateSocialLinks(selectedStreamer);
+          await updateSocialLinks(selectedStreamer);
           closeDropdown();
-        });
+        }
+      });
 
-        item.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
+      dropdownItems.addEventListener('keydown', async (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          const item = e.target.closest('li');
+          if (item) {
             e.preventDefault();
             const selectedStreamer = streamers.find(s => s.id === item.dataset.streamerId);
             dropdownText.textContent = selectedStreamer.name;
-            updateSocialLinks(selectedStreamer);
+            await updateSocialLinks(selectedStreamer);
             closeDropdown();
           }
-        });
+        }
       });
 
-      function loadStreamerFromHash() {
+      async function loadStreamerFromHash() {
         const hash = window.location.hash.substring(1).toLowerCase();
         if (hash) {
           const selectedStreamer = streamers.find(s => s.id.toLowerCase() === decodeURIComponent(hash));
           if (selectedStreamer) {
             dropdownText.textContent = selectedStreamer.name;
-            updateSocialLinks(selectedStreamer);
+            await updateSocialLinks(selectedStreamer);
             return selectedStreamer;
           }
         }
         return null;
       }
 
-      function init() {
-        let selectedStreamer = loadStreamerFromHash();
+      async function init() {
+        let selectedStreamer = await loadStreamerFromHash();
         if (!selectedStreamer) {
           selectedStreamer = streamers[0];
           dropdownText.textContent = selectedStreamer.name;
-          updateSocialLinks(selectedStreamer);
+          await updateSocialLinks(selectedStreamer);
           try {
             window.history.replaceState(null, null, `#${encodeURIComponent(selectedStreamer.id)}`);
           } catch (e) {
@@ -1237,21 +1355,22 @@
 
       init();
 
-      window.addEventListener('hashchange', () => {
-        const selectedStreamer = loadStreamerFromHash();
+      window.addEventListener('hashchange', async () => {
+        const selectedStreamer = await loadStreamerFromHash();
         if (selectedStreamer) {
-          updateSocialLinks(selectedStreamer);
+          await updateSocialLinks(selectedStreamer);
         } else {
           const fallbackStreamer = streamers[0];
           dropdownText.textContent = fallbackStreamer.name;
-          updateSocialLinks(fallbackStreamer);
+          await updateSocialLinks(fallbackStreamer);
         }
       });
 
-      setInterval(() => {
+      setInterval(async () => {
         const selectedStreamer = streamers.find(s => s.name === dropdownText.textContent) || streamers[0];
-        updateSocialLinks(selectedStreamer);
-      }, 60000);
+        await updateSocialLinks(selectedStreamer);
+        await populateDropdown();
+      }, 1000); // Update every second for real-time countdown
     });
   </script>
 </body>
