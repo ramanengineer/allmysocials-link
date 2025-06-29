@@ -599,9 +599,6 @@
       <div class="schedule-info" id="schedule-info">Next stream in: TBD</div>
     </div>
     <div class="social-container" id="social-container">
-      <div class="streamer-profile">
-        <img src="https://i.postimg.cc/9XsKQYKC/bizaropeter-profile.png" alt="BizaroPeter logo" id="streamer-avatar" loading="lazy">
-      </div>
       <h2 id="streamer-name">Select a Streamer</h2>
       <div class="social-buttons">
         <div class="primary-socials" id="primary-socials"></div>
@@ -619,7 +616,6 @@
       {
         id: 'xwlasxd',
         name: 'xwlasxd',
-        avatar: 'https://i.postimg.cc/F1k6Lykq/xwlasxd-logo.png',
         social: {
           youtube: { webUrl: 'https://youtube.com/@xwlasxd' },
           twitch: { webUrl: 'https://twitch.tv/xwlasxd' },
@@ -645,7 +641,6 @@
       {
         id: 'HeavySamLifts',
         name: 'HeavySamLifts',
-        avatar: 'https://i.postimg.cc/MMNrLTNd/HSL-logo.png',
         social: {
           youtube: { webUrl: 'https://youtube.com/@HeavySamLifts' },
           twitch: { webUrl: 'https://twitch.tv/HeavySamLifts' },
@@ -671,7 +666,6 @@
       {
         id: 'ShadyPeterLive',
         name: 'ShadyPeterLive',
-        avatar: 'https://i.postimg.cc/2V4XHCw7/shady-peter-live-profile-3k.png',
         social: {
           youtube: { webUrl: 'https://youtube.com/@ShadyPeterLive' },
           twitch: { webUrl: 'https://twitch.tv/ShadyPeterLive' },
@@ -697,7 +691,6 @@
       {
         id: 'ramkrishanghoil',
         name: 'ramkrishanghoil',
-        avatar: 'https://i.postimg.cc/3kTz7kRq/rkg-logo.png',
         social: {
           youtube: { webUrl: 'https://youtube.com/@ramkrishanghoil' },
           twitch: { webUrl: 'https://twitch.tv/ramkrishanghoil' },
@@ -723,7 +716,6 @@
       {
         id: 'zxckjsdv',
         name: 'zxckjsdv',
-        avatar: 'https://i.postimg.cc/0QqJjT1F/zxckjsdv-profile.png',
         social: {
           youtube: { webUrl: 'https://youtube.com/@zxckjsdv' },
           twitch: { webUrl: 'https://twitch.tv/zxckjsdv' },
@@ -749,7 +741,6 @@
       {
         id: 'brbcompiling',
         name: 'brbcompiling',
-        avatar: 'https://i.postimg.cc/LXhwKQ7N/brbcompiling-profile.png',
         social: {
           youtube: { webUrl: 'https://youtube.com/@brbcompiling' },
           twitch: { webUrl: 'https://twitch.tv/brbcompiling' },
@@ -775,7 +766,6 @@
       {
         id: 'TrevorMarksman',
         name: 'TrevorMarksman',
-        avatar: 'https://i.postimg.cc/ZRpYD5yd/random-easy-logo.png',
         social: {
           youtube: { webUrl: 'https://youtube.com/@TrevorMarksman' },
           twitch: { webUrl: 'https://twitch.tv/TrevorMarksman' },
@@ -801,7 +791,6 @@
       {
         id: 'ValentineCoolio',
         name: 'ValentineCoolio',
-        avatar: 'https://i.postimg.cc/P57tXwWD/coolio-kick.png',
         social: {
           youtube: { webUrl: 'https://youtube.com/@ValentineCoolio' },
           twitch: { webUrl: 'https://twitch.tv/ValentineCoolio' },
@@ -827,7 +816,6 @@
       {
         id: 'LegacyMartian',
         name: 'LegacyMartian',
-        avatar: 'https://i.postimg.cc/PLfcp01z/legacy-martian-logo.png',
         social: {
           youtube: { webUrl: 'https://youtube.com/@LegacyMartian' },
           twitch: { webUrl: 'https://twitch.tv/LegacyMartian' },
@@ -853,7 +841,6 @@
       {
         id: 'BizaroPeter',
         name: 'BizaroPeter',
-        avatar: 'https://i.postimg.cc/9XsKQYKC/bizaropeter-profile.png',
         social: {
           youtube: { webUrl: 'https://youtube.com/@BizaroPeter' },
           twitch: { webUrl: 'https://twitch.tv/BizaroPeter' },
@@ -879,7 +866,6 @@
       {
         id: 'GynaWENS',
         name: 'GynaWENS',
-        avatar: 'https://i.postimg.cc/k5jh3QWr/wens-logo.png',
         social: {
           youtube: { webUrl: 'https://youtube.com/@GynaWENS' },
           twitch: { webUrl: 'https://twitch.tv/GynaWENS' },
@@ -905,7 +891,6 @@
       {
         id: 'MovieByMacaffe',
         name: 'MovieByMacaffe',
-        avatar: 'https://i.postimg.cc/hjLg1ZH8/macaffe-best-logo.png',
         social: {
           youtube: { webUrl: 'https://youtube.com/@MovieByMacaffe' },
           twitch: { webUrl: 'https://twitch.tv/MovieByMacaffe' },
@@ -931,7 +916,6 @@
       {
         id: 'xvbrznem',
         name: 'xvbrznem',
-        avatar: 'https://i.postimg.cc/HcVh35Zr/xvbrznem-logo.jpg',
         social: {
           youtube: { webUrl: 'https://youtube.com/@xvbrznem' },
           twitch: { webUrl: 'https://twitch.tv/xvbrznem' },
@@ -961,7 +945,6 @@
       const dropdownItems = document.querySelector('.dropdown__items');
       const dropdownText = document.getElementById('dropdown-text');
       const streamerName = document.getElementById('streamer-name');
-      const streamerAvatar = document.getElementById('streamer-avatar');
       const primarySocials = document.getElementById('primary-socials');
       const socialGrid = document.getElementById('social-grid');
       const dropdown = document.querySelector('.dropdown');
@@ -1128,8 +1111,6 @@
 
       async function updateSocialLinks(streamer) {
         streamerName.textContent = streamer.name;
-        streamerAvatar.src = streamer.avatar;
-        streamerAvatar.alt = `${streamer.name} logo`;
         primarySocials.innerHTML = '';
         socialGrid.innerHTML = '';
 
